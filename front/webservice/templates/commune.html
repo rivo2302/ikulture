@@ -13,7 +13,7 @@
             </h5>
         </div>
         <div class="col">
-            <h2>L'autre fichier</h2>
+            <h2>Map</h2>
             {% include 'map.html' %}
         </div>
     </div> 
@@ -22,7 +22,11 @@
         {{commune[5]}}
     </div>
     <div>
-
+        <ul>
+            {% for plante in plantes %}
+                <li><a href="http://127.0.0.1:5000/plante/{{plante[0]}}">{{plante[1]}}</a></li>
+            {% endfor %}
+        </ul>
     </div>
 </div>
 

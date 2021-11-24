@@ -10,6 +10,19 @@ from  service import  *
 API_URL = 'http://localhost:8000'
 BASE_URL = 'http://localhost:5000'
 
+
+@app.route('/accueil', methods=[ 'GET'])
+def accueil():
+    return render_template('accueil.html')
+
+@app.route('/apropos', methods=[ 'GET'])
+def apropos():
+    return render_template('apropos.html')
+
+
+def map():
+    return render_template('accueil.html')
+
 @app.route('/map', methods=[ 'GET'])
 def map():
     start_coords = (-18.89523134876237, 47.5418858782649)
@@ -29,6 +42,24 @@ def commune(id):
     folium_map = folium.Map(location=(data[3], data[4]), zoom_start=14)
     folium.Marker([data[3], data[4]], popup= f"{data[1]}").add_to(folium_map)
     folium_map.save('webservice/templates/map.html')
-    return render_template('commune.html', commune=data, meteo=weather)
+    response1 = requests.get(f'{API_URL}/plante')
+    data1 = json.loads(response1.text)
+    return render_template('commune.html', commune=data, meteo=weather, plantes=data1)
 
+@app.route('/plante/<string:id>')
+def plante(id):
+    response = requests.get(f'{API_URL}/plante/{id}')
+    data = json.loads(response.text)
+
+    labels = [
+        'JAN', 'FEV', 'MAR', 'APR',
+        'MAI', 'JUIN', 'JUL', 'AUG',
+        'SEP', 'OCT', 'NOV', 'DEC'
+    ]
+    values = [
+        0, 0, 0, 0,
+        0, 10, 13, 15,
+        70, 80, 100, 5
+    ]
+    return render_template('plante.html', plante=data ,title='Bitcoin Monthly Price in USD', max=100, labels=labels, values=values)
 

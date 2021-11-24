@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+<h4> Le contenu du plante html</h4>
+
+<div class="content_plante">
+    <div class="row">
+        <div class="col">
+            <h2>Nom : {{plante[1]}}</h2>
+            Description :
+            <h5>
+                {{plante[3]}}
+            </h5>
+        </div>
+        <div class="col">
+            <h2>Photo</h2>
+            <img src="{{plante[2]}}" alt="Sary">
+        </div>
+    </div> 
+    <div>
+        <h1>La culture de {{plante[1]}}</h1>
+        Préparation = {{plante[4]}} </br>
+        Semer = {{plante[5]}} </br>
+        Cultiver = {{plante[6]}} </br>
+        Récolter= {{plante[7]}} </br>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col">
+            <h1>Statistique</h1>
+            {{plante[8]}}
+        </div>
+        <div class="col">
+            <h1>À savoir</h1>
+            {{plante[9]}}
+        </div>
+        <div class="col">
+            <h1>Rendement</h1>
+            {{plante[10]}}
+        </div>
+
+    </div>
+    <canvas id="chart" width="600" height="400"></canvas>
+
+</div>
+    
+    <script>
+            // bar chart data
+            var barData = {
+                labels : [
+                {% for item in labels %}
+                "{{ item }}",
+                {% endfor %}
+            ],
+
+                datasets : [{
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                data : [
+                    {% for item in values %}
+                    "{{ item }}",
+                    {% endfor %}
+                ]
+                }
+                ]
+            }
+
+            // get bar chart canvas
+            var mychart = document.getElementById("chart").getContext("2d");
+
+            steps = 10
+            max = {{max}}
+
+            // draw bar chart
+            new Chart(mychart).Bar(barData, {
+            scaleOverride: true,
+            scaleSteps: steps,
+            scaleStepWidth: Math.ceil(max / steps),
+            scaleStartValue: 0,
+            scaleShowVerticalLines: true,
+            scaleShowGridLines : true,
+            barShowStroke : true,
+            scaleShowLabels: true
+            }
+            );
+
+    </script>
+   
+{% endblock %}

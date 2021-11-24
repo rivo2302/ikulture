@@ -66,7 +66,7 @@ class Requete() :
     def getDetailPlante(self,id):
 
         req = """
-            SELECT id, nom, photo ,description , preparation, semer , cultiver ,cultiver
+            SELECT id, nom, photo ,description , preparation, semer , cultiver ,recolter ,statistique , asavoir,rendement
             FROM plante  
             WHERE id = %s
         """
