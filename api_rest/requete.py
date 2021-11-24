@@ -33,7 +33,7 @@ class Requete() :
         req = """
             SELECT id, nom, latitude , longitude 
             FROM commune  
-            Where longitude  IS NOT NULL
+            WHERE longitude  IS NOT NULL
             """
         self.cursor.execute(req)
         res =  self.cursor.fetchall()
@@ -42,15 +42,38 @@ class Requete() :
     def getDetailCommune(self,id):
 
         req = """
-            SELECT id, nom 
-            FROM commune 
+            SELECT com.id, com.nom , reg.nom ,com.latitude, com.longitude , com.description
+            FROM commune com
+            INNER JOIN region reg 
+            ON reg.id = com.id_region
+            WHERE com.id=%s
+        """
+        self.cursor.execute(req, (id,))
+        res = self.cursor.fetchone()
+        return res
+
+    def getListPlante(self):
+
+        req = """
+            SELECT id, nom, photo
+            FROM plante  
+            WHERE photo  IS NOT NULL
+            """
+        self.cursor.execute(req)
+        res =  self.cursor.fetchall()
+        return res 
+
+    def getDetailPlante(self,id):
+
+        req = """
+            SELECT id, nom, photo ,description , preparation, semer , cultiver ,cultiver
+            FROM plante  
             WHERE id = %s
         """
         self.cursor.execute(req, (id,))
         res = self.cursor.fetchone()
         return res
 
-        
     def _close(self):
         self.db.close()
 

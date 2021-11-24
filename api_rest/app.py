@@ -1,3 +1,4 @@
+from typing_extensions import Self
 import falcon
 
 from requete import Requete
@@ -15,12 +16,12 @@ class detailCommune :
     def __init__ (self,id):
         self.id = id
 
-    def on_get(self, req, resp):
+    def on_get(self, req, resp,id):
         """GET DETAIL COMMUNE"""
-
-        resp.media = db.getDetailCommune(self.id)
+        resp.media = db.getDetailCommune(id)
 
 app = application = falcon.App()
 app.add_route('/commune', listCommune())
-app.add_route('/commune/<int:year>', listCommune(id))
+app.add_route('/commune/{id}', detailCommune(id))
+app.add_route('/plante', listPlante())
 

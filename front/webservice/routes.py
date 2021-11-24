@@ -1,8 +1,11 @@
 from flask import  render_template, url_for
-from webservice import app
 import requests 
 import folium
 import json
+
+
+from webservice import app
+from  service import  *
 
 API_URL = 'http://localhost:8000'
 BASE_URL = 'http://localhost:5000'
@@ -20,9 +23,12 @@ def map():
 
 @app.route('/commune/<string:id>')
 def commune(id):
-    response = requests.get(f'{API_URL}/commune/id')
+    response = requests.get(f'{API_URL}/commune/{id}')
     data = json.loads(response.text)
-    print(data)
-    return render_template('commune.html', commune=data)
+    weather = meteo(data[2])
+    folium_map = folium.Map(location=(data[3], data[4]), zoom_start=14)
+    folium.Marker([data[3], data[4]], popup= f"{data[1]}").add_to(folium_map)
+    folium_map.save('webservice/templates/map.html')
+    return render_template('commune.html', commune=data, meteo=weather)
 
 

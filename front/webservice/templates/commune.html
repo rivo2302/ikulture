@@ -1,12 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-    
-<h1> Le contenu du Commune html</h1>
+<h4> Le contenu du Commune html</h4>
+
 <div class="content_commune">
-    <h2>{{commune[1]}}</h2>
+    <div class="row">
+        <div class="col">
+            <h2>Nom : {{commune[1]}}</h2>
+            Meteo :
+            <h5>
+                Degré = {{meteo["temp"]}}
+                Déscription= {{meteo["desc"]}}
+            </h5>
+        </div>
+        <div class="col">
+            <h2>L'autre fichier</h2>
+            {% include 'map.html' %}
+        </div>
+    </div> 
+    <div>
+        Desciption : </br>
+        {{commune[5]}}
+    </div>
+    <div>
+
+    </div>
 </div>
 
 <script>
-
 </script>
 {% endblock %}
