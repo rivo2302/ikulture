@@ -20,15 +20,12 @@
         Ce sera ici le header
     </header>
 
-    <div class="container-fluid">
-        <div class="row">
+    <body>
+        {% block content %}
 
-            <div class="col-12 mt-3">
-                {% block content %}
-                {% endblock content %}
-            </div>
-        </div>
-    </div>
+
+        {% endblock content %}   
+    </body>
     
     <footer> 
         C'est ici qu'on va mettre le footer

@@ -31,7 +31,7 @@ class Requete() :
     def getListCommune(self):
 
         req = """
-            SELECT id, nom, longitude , latitude 
+            SELECT id, nom, latitude , longitude 
             FROM commune  
             Where longitude  IS NOT NULL
             """
@@ -39,6 +39,20 @@ class Requete() :
         res =  self.cursor.fetchall()
         return res 
 
+    def getDetailCommune(self,id):
+
+        req = """
+            SELECT id, nom 
+            FROM commune 
+            WHERE id = %s
+        """
+        self.cursor.execute(req, (id,))
+        res = self.cursor.fetchone()
+        return res
+
+        
     def _close(self):
         self.db.close()
+
+
 
