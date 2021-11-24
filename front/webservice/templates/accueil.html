@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
-{% block content %}
-        
-<div class="content_a_propos">
+{% block static %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='accueil.css') }}">
+{% endblock %}
+
+{% block content %}  
+
 
     Bienvenue sur la page de l'accueil
 
-</div>
 
 {% endblock %}

@@ -32,7 +32,7 @@ def map():
     for donnee in data :
         folium.Marker([donnee[2], donnee[3]], popup= f"<a href={BASE_URL}/commune/{donnee[0]}>{donnee[1]}</a>", tooltip= f"{donnee[1]}").add_to(folium_map)
     folium_map.save('webservice/templates/map.html')
-    return render_template('index.html')
+    return render_template('carte.html' )
 
 @app.route('/commune/<string:id>')
 def commune(id):
