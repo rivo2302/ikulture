@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block static %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='liste_plante.css') }}">
+{% endblock %}
+
+{% block content %}
+<div>
+    <h1 class="liste">Liste des plantes</h1>
+    <ul>
+        {% for plante in plantes %}
+            <li>
+                <a href="http://127.0.0.1:5000/plante/{{plante[0]}}">
+                <img src="{{plante[2]}}" alt="Photo" srcset="">
+                    {{plante[1]}}
+                </a>
+                
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<script>
+
+</script>
+{% endblock %}

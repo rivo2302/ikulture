@@ -6,7 +6,7 @@
 
 
 {% block content %}
-<h4> Le contenu du Commune html</h4>
+<h4 class="commune"> Le contenu du Commune html</h4>
 
 <div class="row">
     <div class="col">
@@ -27,6 +27,7 @@
     {{commune[5]}}
 </div>
 <div>
+    LIste des plantes :
     <ul>
         {% for plante in plantes %}
             <li><a href="http://127.0.0.1:5000/plante/{{plante[0]}}">{{plante[1]}}</a></li>

@@ -3,7 +3,6 @@ import requests
 import folium
 import json
 
-
 from webservice import app
 from  service import  *
 
@@ -19,7 +18,6 @@ def accueil():
 def apropos():
     return render_template('apropos.html')
 
-
 def map():
     return render_template('accueil.html')
 
@@ -34,6 +32,7 @@ def map():
     folium_map.save('webservice/templates/map.html')
     return render_template('carte.html' )
 
+
 @app.route('/commune/<string:id>')
 def commune(id):
     response = requests.get(f'{API_URL}/commune/{id}')
@@ -45,6 +44,12 @@ def commune(id):
     response1 = requests.get(f'{API_URL}/plante')
     data1 = json.loads(response1.text)
     return render_template('commune.html', commune=data, meteo=weather, plantes=data1)
+
+@app.route('/plante')
+def liste_plante(   ):
+    response1 = requests.get(f'{API_URL}/plante')
+    data1 = json.loads(response1.text)
+    return render_template('liste_plante.html',  plantes=data1) 
 
 @app.route('/plante/<string:id>')
 def plante(id):
