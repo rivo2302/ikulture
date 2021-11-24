@@ -1,4 +1,4 @@
-GET http://localhost:8000/region
+GET http://localhost:8000/commune
 Content-Type: application/json
 
 {
